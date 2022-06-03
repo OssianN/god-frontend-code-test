@@ -9,13 +9,19 @@ interface Props {
 
 const Slider = ({ list, children }: Props): React.ReactElement => {
   const [sliderOffset, setSliderOffset] = useState<number>(0)
-  const [offset, setOffset] = useState<number>(0)
+  const listRef = useRef<HTMLUListElement>(null)
 
-  const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
-    const container = e.currentTarget.clientWidth
-    const scrollWidth = e.currentTarget.scrollWidth
-    console.log({ container, scrollWidth })
+  const handleScroll = () => {
+    if (!listRef.current) {
+      return
+    }
+
+    listRef.current.target
   }
+
+  //   useEffect(() => {
+  //     setSliderOffset(e.currentTarget.scrollLeft)
+  //   }, [sliderOffset])
 
   return (
     <Block
@@ -27,8 +33,8 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
         overflow: 'hidden',
       }}
     >
-      <ul
-        // as="ul"
+      <Flex
+        as="ul"
         style={{
           boxSizing: 'border-box',
           display: 'flex !important',
@@ -54,7 +60,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
             </Block>
           )
         })}
-      </ul>
+      </Flex>
       <SliderNavigation
         sliderOffset={sliderOffset}
         setSliderOffset={setSliderOffset}

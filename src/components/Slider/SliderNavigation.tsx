@@ -31,7 +31,10 @@ const SliderNavigation = ({
               width: '.75rem',
               height: '.75rem',
               borderRadius: '100px',
-              background: sliderOffset === i ? '#141414' : '#ebebeb',
+              background:
+                Math.floor(sliderOffset / (window.innerWidth * 0.75)) === i
+                  ? '#141414'
+                  : '#ebebeb',
             }}
             onClick={() => setSliderOffset(i)}
             key={i + Math.random()}
