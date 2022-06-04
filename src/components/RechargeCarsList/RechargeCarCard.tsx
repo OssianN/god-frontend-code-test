@@ -24,7 +24,7 @@ const RechargeCarCard = ({
           margin: '1rem auto',
         }}
       >
-        <Image src={imageUrl} width="800" height="600" />
+        <Image src={imageUrl} width="800" height="600" alt={modelName} />
         <Flex
           extend={{
             flexDirection: 'row',
@@ -37,13 +37,23 @@ const RechargeCarCard = ({
           <Link href={`/learn/${id}`}>
             LEARN
             <Block extend={{ display: 'inline-block', marginLeft: '.5rem' }}>
-              <Image src={chevronSmall} width="10" height="10" />
+              <Image
+                src={chevronSmall}
+                width="10"
+                height="10"
+                alt="link indicator"
+              />
             </Block>
           </Link>
           <Link href={`/shop/${id}`}>
             SHOP
             <Block extend={{ display: 'inline-block', marginLeft: '.5rem' }}>
-              <Image src={chevronSmall} width="10" height="10" />
+              <Image
+                src={chevronSmall}
+                width="10"
+                height="10"
+                alt="link indicator"
+              />
             </Block>
           </Link>
         </Flex>

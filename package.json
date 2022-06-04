@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.9.4",
     "@types/react": "^17.0.22",
     "@types/react-dom": "^17.0.9",
     "axios": "^0.27.2",
-    "next": "^11.1.2",
+    "babel-jest": "^28.1.0",
+    "next": "^12.1.6",
+    "node-mocks-http": "^1.11.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "sharp": "^0.30.6",
+    "ts-node": "^10.8.1",
     "typescript": "~4.4.3",
     "vcc-ui": "^3.0.3"
   },
@@ -21,7 +25,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "browserslist": {
     "production": [
@@ -37,6 +42,7 @@
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.2"
+    "eslint-config-next": "11.1.2",
+    "jest": "^28.1.0"
   }
 }

@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Click, Flex } from 'vcc-ui'
 
 interface Props {
   sliderOffset: number
-  setSliderOffset: React.Dispatch<React.SetStateAction<number>>
   list: RechargeCar[]
+  handleScroll: Function
 }
 
 const SliderNavigation = ({
   sliderOffset,
-  setSliderOffset,
   list,
+  handleScroll,
 }: Props): React.ReactElement => {
   return (
     <Flex
@@ -24,20 +24,20 @@ const SliderNavigation = ({
         gap: '0.5rem',
       }}
     >
-      {list.map((_, i) => {
+      {list.map(({ id }, i) => {
+        const poistion = (sliderOffset + 8 * i) / (window?.innerWidth * 0.8)
+
         return (
           <Click
             extend={{
               width: '.75rem',
               height: '.75rem',
               borderRadius: '100px',
-              background:
-                Math.floor(sliderOffset / (window.innerWidth * 0.75)) === i
-                  ? '#141414'
-                  : '#ebebeb',
+              transition: '0.3s',
+              background: Math.floor(poistion) === i ? '#141414' : '#ebebeb',
             }}
-            onClick={() => setSliderOffset(i)}
-            key={i + Math.random()}
+            onClick={() => handleScroll(i)}
+            key={id}
           ></Click>
         )
       })}
