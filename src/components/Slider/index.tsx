@@ -9,11 +9,12 @@ interface Props {
 }
 
 const Slider = ({ list, children }: Props): React.ReactElement => {
+  const [isDesktop, setIsDesktop] = useState<boolean>(false)
   const [sliderOffset, setSliderOffset] = useState<number>(0)
   const [SSR, setSSR] = useState<boolean>(true)
   const listRef = useRef<HTMLUListElement>(null)
 
-  const handleScroll = (targetItem: number) => {
+  const handleMobileScroll = (targetItem: number) => {
     if (!listRef.current) {
       return
     }
@@ -26,11 +27,26 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
     listRef.current.scrollLeft = offset
   }
 
+  const calculateOffset = () => {
+    return sliderOffset === 1
+      ? sliderOffset * window?.innerWidth - 32
+      : sliderOffset * window.innerWidth - 64
+  }
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setSSR(false)
     }
-  })
+
+    const handleResize = () => {
+      const isWindowDesktop = window.innerWidth > 766
+      setIsDesktop(isWindowDesktop)
+      setSliderOffset(0)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <>
@@ -59,8 +75,8 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
               transition: '0.3s ease-out',
 
               '@media (min-width: 767px)': {
-                overflowX: 'hidden',
-                transform: `translateX(${sliderOffset * window.innerWidth * 0.8}px)`,
+                overflowX: 'visible',
+                transform: `translateX(-${calculateOffset()}px)`,
               },
             }}
             onScroll={(e: React.UIEvent<HTMLElement>) =>
@@ -74,8 +90,10 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
                   as="li"
                   extend={{
                     minWidth: '80vw',
+                    width: '80vw',
                     '@media (min-width: 767px)': {
-                      minWidth: window.innerWidth / 4 - 24,
+                      minWidth: 'calc(25vw - 24px)',
+                      width: 'calc(25vw - 24px)',
                     },
                   }}
                   key={i}
@@ -85,17 +103,17 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
               )
             })}
           </Flex>
-          {window.innerWidth < 767 ? (
-            <MobileSliderNavigation
-              sliderOffset={sliderOffset}
-              list={list}
-              handleScroll={handleScroll}
-            />
-          ) : (
+          {isDesktop ? (
             <DesktopSliderNavigation
               sliderOffset={sliderOffset}
               setSliderOffset={setSliderOffset}
               list={list}
+            />
+          ) : (
+            <MobileSliderNavigation
+              sliderOffset={sliderOffset}
+              list={list}
+              handleMobileScroll={handleMobileScroll}
             />
           )}
         </Block>

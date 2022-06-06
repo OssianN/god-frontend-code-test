@@ -9,21 +9,37 @@ interface Props {
   list: RechargeCar[]
 }
 
+export const calculateNextPage = (
+  sliderOffset: number,
+  list: RechargeCar[]
+): number => {
+  const fullPages = Math.floor(list.length / 4) - 1
+  const isHalfPage = list.length % 4 > 0 ? 1 : 0
+  return sliderOffset === fullPages + isHalfPage ? 0 : sliderOffset + 1
+}
+
+export const calculatePreviousPage = (
+  sliderOffset: number,
+  list: RechargeCar[]
+): number => {
+  const fullPages = Math.floor(list.length / 4) - 1
+  const isHalfPage = list.length % 4 > 0 ? 1 : 0
+  return sliderOffset === 0 ? fullPages + isHalfPage : sliderOffset - 1
+}
+
 const SliderNavigation = ({
   sliderOffset,
   setSliderOffset,
   list,
 }: Props): React.ReactElement => {
   const handleScrollRight = (): void => {
-    sliderOffset === list.length / 4
-      ? setSliderOffset(0)
-      : setSliderOffset((prev: number) => prev + 1)
+    const newPage = calculateNextPage(sliderOffset, list)
+    setSliderOffset(newPage)
   }
 
   const handleScrollLeft = (): void => {
-    sliderOffset === 0
-      ? setSliderOffset(list.length / 4)
-      : setSliderOffset((prev: number) => prev - 1)
+    const newPage = calculatePreviousPage(sliderOffset, list)
+    setSliderOffset(newPage)
   }
 
   return (
@@ -46,7 +62,7 @@ const SliderNavigation = ({
           borderRadius: '100px',
           transition: '0.3s',
         }}
-        onClick={handleScrollRight}
+        onClick={handleScrollLeft}
       >
         <Image
           src={chevronCircled}
@@ -65,7 +81,7 @@ const SliderNavigation = ({
           border: '1px solid #141414',
           transition: '0.3s',
         }}
-        onClick={handleScrollLeft}
+        onClick={handleScrollRight}
       >
         <Image
           src={chevronCircled}

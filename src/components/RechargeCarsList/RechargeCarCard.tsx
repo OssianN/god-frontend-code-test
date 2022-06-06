@@ -12,11 +12,22 @@ const RechargeCarCard = ({
 }: Props): React.ReactElement => {
   return (
     <Block id={id}>
-      <Text extend={{ fontWeight: '500', color: '#707070' }}>{bodyType}</Text>
-      <Text extend={{ fontWeight: '500', fontSize: '1.3rem' }}>
-        {modelName}
+      <Text extend={{ fontWeight: '500 !important', color: '#707070' }}>
+        {bodyType}
       </Text>
-      <Text extend={{ color: '#707070' }}>{modelType}</Text>
+      <Flex
+        extend={{
+          '@media (min-width: 1024px)': {
+            flexDirection: 'row',
+            gap: '.5rem',
+          },
+        }}
+      >
+        <Text extend={{ fontWeight: '500 !important', fontSize: '1.3rem' }}>
+          {modelName}
+        </Text>
+        <Text extend={{ color: '#707070' }}>{modelType}</Text>
+      </Flex>
       <Block
         extend={{
           position: 'relative',
