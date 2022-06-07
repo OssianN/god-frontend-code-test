@@ -39,10 +39,11 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
     }
 
     const handleResize = () => {
-      const isWindowDesktop = window.innerWidth > 766
+      const isWindowDesktop = window.innerWidth >= 550
       setIsDesktop(isWindowDesktop)
       setSliderOffset(0)
     }
+    handleResize()
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
@@ -73,8 +74,13 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
               paddingRight: '2rem',
               overflowX: 'scroll',
               transition: '0.3s ease-out',
+              scrollbarWidth: 'none',
 
-              '@media (min-width: 767px)': {
+              '::-webkit-scrollbar': {
+                display: 'none',
+              },
+
+              '@media (min-width: 550px)': {
                 overflowX: 'visible',
                 transform: `translateX(-${calculateOffset()}px)`,
               },
@@ -91,7 +97,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
                   extend={{
                     minWidth: '80vw',
                     width: '80vw',
-                    '@media (min-width: 767px)': {
+                    '@media (min-width: 550px)': {
                       minWidth: 'calc(25vw - 24px)',
                       width: 'calc(25vw - 24px)',
                     },

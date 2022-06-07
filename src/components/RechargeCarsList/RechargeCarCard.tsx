@@ -43,11 +43,22 @@ const RechargeCarCard = ({
             gap: '1rem',
             width: '100%',
             marginTop: '1rem',
+
+            '@media (max-width: 700px) and (orientation: landscape)': {
+              flexDirection: 'column',
+              gap: '0',
+              alignItems: 'center',
+            },
           }}
         >
           <Link href={`/learn/${id}`}>
             LEARN
-            <Block extend={{ display: 'inline-block', marginLeft: '.5rem' }}>
+            <Block
+              extend={{
+                display: 'inline-block',
+                marginLeft: '.5rem',
+              }}
+            >
               <Image
                 src={chevronSmall}
                 width="10"
@@ -58,7 +69,12 @@ const RechargeCarCard = ({
           </Link>
           <Link href={`/shop/${id}`}>
             SHOP
-            <Block extend={{ display: 'inline-block', marginLeft: '.5rem' }}>
+            <Block
+              extend={{
+                display: 'inline',
+                marginLeft: '.5rem',
+              }}
+            >
               <Image
                 src={chevronSmall}
                 width="10"

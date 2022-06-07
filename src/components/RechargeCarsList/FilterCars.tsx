@@ -10,7 +10,7 @@ const FilterCars = ({
   carsList,
   setFilteredCars,
 }: Props): React.ReactElement => {
-  const [inputValue, setInputValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string | undefined>(undefined)
 
   const getBodyTypes = (carsList: RechargeCar[]): string[] => {
     const bodyTypesList: string[] = []
@@ -29,18 +29,24 @@ const FilterCars = ({
   }
 
   useEffect(() => {
+    if (!inputValue) {
+      setFilteredCars(null)
+      return
+    }
+
     const newList = carsList.filter(car => car.bodyType === inputValue)
     setFilteredCars(newList)
   }, [inputValue])
 
   return (
-    <Block extend={{ maxWidth: '600px', margin: '2rem auto' }}>
+    <Block extend={{ maxWidth: '600px', margin: '1rem auto' }}>
       <SelectInput
         onChange={handleChange}
         label={'Body Type'}
+        value={inputValue}
         description="filter by body type"
       >
-        <option>All</option>
+        <option value={''}>All</option>
         {bodyTypes.map(type => {
           return (
             <option value={type} key={type}>

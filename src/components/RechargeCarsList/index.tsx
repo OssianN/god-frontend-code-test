@@ -9,9 +9,9 @@ interface Props {
 }
 
 const RechargeCarsList = ({ carsList }: Props): React.ReactElement => {
-  const [filteredCars, setFilteredCars] = useState<RechargeCar[]>([])
+  const [filteredCars, setFilteredCars] = useState<RechargeCar[] | null>(null)
 
-  const displayedList = filteredCars.length > 0 ? filteredCars : carsList
+  const displayedList = filteredCars ? filteredCars : carsList
 
   return (
     <Block>
