@@ -10,7 +10,7 @@ const FilterCars = ({
   carsList,
   setFilteredCars,
 }: Props): React.ReactElement => {
-  const [inputValue, setInputValue] = useState<string | undefined>(undefined)
+  const [inputValue, setInputValue] = useState<string>('')
 
   const getBodyTypes = (carsList: RechargeCar[]): string[] => {
     const bodyTypesList: string[] = []

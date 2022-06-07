@@ -43,12 +43,6 @@ const RechargeCarCard = ({
             gap: '1rem',
             width: '100%',
             marginTop: '1rem',
-
-            '@media (max-width: 700px) and (orientation: landscape)': {
-              flexDirection: 'column',
-              gap: '0',
-              alignItems: 'center',
-            },
           }}
         >
           <Link href={`/learn/${id}`}>

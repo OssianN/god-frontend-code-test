@@ -13,6 +13,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
   const [sliderOffset, setSliderOffset] = useState<number>(0)
   const [SSR, setSSR] = useState<boolean>(true)
   const listRef = useRef<HTMLUListElement>(null)
+  const desktopLimit = 680
 
   const handleMobileScroll = (targetItem: number) => {
     if (!listRef.current) {
@@ -41,7 +42,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
     setSSR(false)
 
     const handleResize = () => {
-      const isWindowDesktop = window.innerWidth >= 550
+      const isWindowDesktop = window.innerWidth >= desktopLimit
       setIsDesktop(isWindowDesktop)
       setSliderOffset(0)
     }
@@ -82,7 +83,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
                 display: 'none',
               },
 
-              '@media (min-width: 550px)': {
+              '@media (min-width: 680px)': {
                 overflowX: 'visible',
                 transform: `translateX(-${calculateOffset()}px)`,
               },
@@ -99,7 +100,7 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
                   extend={{
                     minWidth: '80vw',
                     width: '80vw',
-                    '@media (min-width: 550px)': {
+                    '@media (min-width: 680px)': {
                       minWidth: 'calc(25vw - 24px)',
                       width: 'calc(25vw - 24px)',
                     },
