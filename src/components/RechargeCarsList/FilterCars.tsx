@@ -21,6 +21,7 @@ const FilterCars = ({
     })
     return bodyTypesList
   }
+
   const bodyTypes = useMemo(() => getBodyTypes(carsList), [carsList])
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -36,7 +37,7 @@ const FilterCars = ({
 
     const newList = carsList.filter(car => car.bodyType === inputValue)
     setFilteredCars(newList)
-  }, [inputValue])
+  }, [inputValue, carsList, setFilteredCars])
 
   return (
     <Block extend={{ maxWidth: '600px', margin: '1rem auto' }}>

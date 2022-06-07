@@ -34,9 +34,11 @@ const Slider = ({ list, children }: Props): React.ReactElement => {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setSSR(false)
+    if (typeof window === 'undefined') {
+      return
     }
+
+    setSSR(false)
 
     const handleResize = () => {
       const isWindowDesktop = window.innerWidth >= 550
