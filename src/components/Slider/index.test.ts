@@ -87,18 +87,18 @@ describe('1.0 next page function', () => {
   })
 })
 
-describe('1.0 previos page function', () => {
-  test('1.1 returns previos page when on last page', () => {
+describe('2.0 previos page function', () => {
+  test('2.1 returns previos page when on last page', () => {
     const result = calculatePreviousPage(1, mockList)
     expect(result).toBe(0)
   })
 
-  test('1.2 returns last page when on first page', () => {
+  test('2.2 returns last page when on first page', () => {
     const result = calculatePreviousPage(0, mockList)
     expect(result).toBe(1)
   })
 
-  test('1.3 returns half page when list is not divisible by 4', () => {
+  test('2.3 returns half page when list is not divisible by 4', () => {
     const newCar = {
       id: 's60-recharge2',
       modelName: 'S60 Recharge',
